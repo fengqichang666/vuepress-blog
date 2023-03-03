@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>虚拟DOM与DIFF算法 | 前端笔记</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="前端笔记">
+    
+    <link rel="preload" href="/vuepress-blog/assets/css/0.styles.cccb21c6.css" as="style"><link rel="preload" href="/vuepress-blog/assets/js/app.60d19d74.js" as="script"><link rel="preload" href="/vuepress-blog/assets/js/2.eeb24f79.js" as="script"><link rel="preload" href="/vuepress-blog/assets/js/45.693564e6.js" as="script"><link rel="prefetch" href="/vuepress-blog/assets/js/10.39b18703.js"><link rel="prefetch" href="/vuepress-blog/assets/js/11.77b3414b.js"><link rel="prefetch" href="/vuepress-blog/assets/js/12.12716dd4.js"><link rel="prefetch" href="/vuepress-blog/assets/js/13.faeb9608.js"><link rel="prefetch" href="/vuepress-blog/assets/js/14.42226d97.js"><link rel="prefetch" href="/vuepress-blog/assets/js/15.bbb54528.js"><link rel="prefetch" href="/vuepress-blog/assets/js/16.a5985a0f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/17.d8ceb286.js"><link rel="prefetch" href="/vuepress-blog/assets/js/18.52430958.js"><link rel="prefetch" href="/vuepress-blog/assets/js/19.5b08b6e8.js"><link rel="prefetch" href="/vuepress-blog/assets/js/20.0656efd0.js"><link rel="prefetch" href="/vuepress-blog/assets/js/21.496a17d5.js"><link rel="prefetch" href="/vuepress-blog/assets/js/22.ab1f9882.js"><link rel="prefetch" href="/vuepress-blog/assets/js/23.cb3260f1.js"><link rel="prefetch" href="/vuepress-blog/assets/js/24.1e1e2d40.js"><link rel="prefetch" href="/vuepress-blog/assets/js/25.1379ccc6.js"><link rel="prefetch" href="/vuepress-blog/assets/js/26.baf3e08e.js"><link rel="prefetch" href="/vuepress-blog/assets/js/27.60c0ec17.js"><link rel="prefetch" href="/vuepress-blog/assets/js/28.29c98889.js"><link rel="prefetch" href="/vuepress-blog/assets/js/29.1ddfa6c3.js"><link rel="prefetch" href="/vuepress-blog/assets/js/3.4be1bc6c.js"><link rel="prefetch" href="/vuepress-blog/assets/js/30.36ebc1df.js"><link rel="prefetch" href="/vuepress-blog/assets/js/31.14ee6a9b.js"><link rel="prefetch" href="/vuepress-blog/assets/js/32.4146f5ff.js"><link rel="prefetch" href="/vuepress-blog/assets/js/33.9dce2642.js"><link rel="prefetch" href="/vuepress-blog/assets/js/34.b7de1fa5.js"><link rel="prefetch" href="/vuepress-blog/assets/js/35.f118f25a.js"><link rel="prefetch" href="/vuepress-blog/assets/js/36.2a978ba1.js"><link rel="prefetch" href="/vuepress-blog/assets/js/37.2c938d39.js"><link rel="prefetch" href="/vuepress-blog/assets/js/38.74b21671.js"><link rel="prefetch" href="/vuepress-blog/assets/js/39.743d4c06.js"><link rel="prefetch" href="/vuepress-blog/assets/js/4.f876ad59.js"><link rel="prefetch" href="/vuepress-blog/assets/js/40.fc22b3a5.js"><link rel="prefetch" href="/vuepress-blog/assets/js/41.fab35784.js"><link rel="prefetch" href="/vuepress-blog/assets/js/42.da79e3ef.js"><link rel="prefetch" href="/vuepress-blog/assets/js/43.02500ef1.js"><link rel="prefetch" href="/vuepress-blog/assets/js/44.cf615f05.js"><link rel="prefetch" href="/vuepress-blog/assets/js/46.7c39d5f6.js"><link rel="prefetch" href="/vuepress-blog/assets/js/47.3b8d8ffb.js"><link rel="prefetch" href="/vuepress-blog/assets/js/48.47dc0462.js"><link rel="prefetch" href="/vuepress-blog/assets/js/5.18c5236f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/6.e86df8f9.js"><link rel="prefetch" href="/vuepress-blog/assets/js/7.0c523d27.js"><link rel="prefetch" href="/vuepress-blog/assets/js/8.f34f3217.js"><link rel="prefetch" href="/vuepress-blog/assets/js/9.47aeda78.js">
+    <link rel="stylesheet" href="/vuepress-blog/assets/css/0.styles.cccb21c6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vuepress-blog/" class="home-link router-link-active"><!----> <span class="site-name">前端笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>列表</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vuepress-blog/commonJS与es6模块化.html" class="sidebar-link">exports、module.exports和export、export default</a></li><li><a href="/vuepress-blog/eslint使用、报错部分快速修复.html" class="sidebar-link">vue-cli中eslint检验指定文件/夹、报错部分快速修复</a></li><li><a href="/vuepress-blog/git-HEAD-与HEAD-的区别.html" class="sidebar-link">git HEAD~与HEAD^的区别</a></li><li><a href="/vuepress-blog/git-merge-no-ff-与-ff-和-squash的区别.html" class="sidebar-link">git merge --no-ff 与--ff 和--squash的区别</a></li><li><a href="/vuepress-blog/Git凭据管理的三种方式-https.html" class="sidebar-link">Git凭据管理的三种方式(https)</a></li><li><a href="/vuepress-blog/git操作指令.html" class="sidebar-link">git命令总结</a></li><li><a href="/vuepress-blog/JS工具函数.html" class="sidebar-link">工具函数</a></li><li><a href="/vuepress-blog/js执行机制.html" class="sidebar-link">js执行机制</a></li><li><a href="/vuepress-blog/nodejs-websocket.html" class="sidebar-link">nodejs-websocket</a></li><li><a href="/vuepress-blog/pinia.html" class="sidebar-link">pinia</a></li><li><a href="/vuepress-blog/Proxy和Object-defineProperty.html" class="sidebar-link">Proxy和Object.defineProperty</a></li><li><a href="/vuepress-blog/react笔记.html" class="sidebar-link">react笔记</a></li><li><a href="/vuepress-blog/router4笔记.html" class="sidebar-link">router4笔记</a></li><li><a href="/vuepress-blog/uniapp笔记.html" class="sidebar-link">uniapp笔记</a></li><li><a href="/vuepress-blog/vue-elementui-表单检验中发送接口进行校验.html" class="sidebar-link">vue+elementui 表单检验中发送接口进行校验</a></li><li><a href="/vuepress-blog/vue3+elementplus+ts+pinia踩坑记录.html" class="sidebar-link">vue3+elementplus+ts+pinia踩坑记录</a></li><li><a href="/vuepress-blog/vue3笔记.html" class="sidebar-link">vue3笔记</a></li><li><a href="/vuepress-blog/vuex.html" class="sidebar-link">vuex</a></li><li><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html" class="sidebar-link">Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick</a></li><li><a href="/vuepress-blog/vue响应式原理及收集依赖.html" class="sidebar-link">vue响应式原理、依赖收集</a></li><li><a href="/vuepress-blog/vue对数组的处理.html" class="sidebar-link">vue对数组的处理</a></li><li><a href="/vuepress-blog/vue知识点记录.html" class="sidebar-link">vue知识点记录</a></li><li><a href="/vuepress-blog/vue第三方组件css修改.html" class="sidebar-link">vue第三方组件css修改</a></li><li><a href="/vuepress-blog/vue组件通信.html" class="sidebar-link">vue组件通信</a></li><li><a href="/vuepress-blog/webpack笔记.html" class="sidebar-link">webpack笔记</a></li><li><a href="/vuepress-blog/前端学习资料.html" class="sidebar-link">前端学习资料</a></li><li><a href="/vuepress-blog/前端性能优化面试题.html" class="sidebar-link">前端性能优化面试题总结</a></li><li><a href="/vuepress-blog/前端鉴权cookie、session、token、jwt、单点登录.html" class="sidebar-link">前端鉴权cookie、session、token、jwt、单点登录</a></li><li><a href="/vuepress-blog/单点登录SSO.html" class="sidebar-link">单点登录SSO</a></li><li><a href="/vuepress-blog/原型链.html" class="sidebar-link">原型链</a></li><li><a href="/vuepress-blog/导航聚合网站.html" class="sidebar-link">网站、论坛合集</a></li><li><a href="/vuepress-blog/常用的正则表达式大全.html" class="sidebar-link">常用的正则表达式大全</a></li><li><a href="/vuepress-blog/开发中容易遇到的问题.html" class="sidebar-link">开发中容易遇到的问题</a></li><li><a href="/vuepress-blog/数据类型判断.html" class="sidebar-link">数据类型判断</a></li><li><a href="/vuepress-blog/样式清单整理.html" class="sidebar-link">样式清单整理</a></li><li><a href="/vuepress-blog/组件库开发.html" class="sidebar-link">组件库开发</a></li><li><a href="/vuepress-blog/网站、论坛合集.html" class="sidebar-link">网站、论坛合集</a></li><li><a href="/vuepress-blog/虚拟DOM与DIFF算法.html" class="active sidebar-link">虚拟DOM与DIFF算法</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vuepress-blog/虚拟DOM与DIFF算法.html#虚拟dom-virtual-dom" class="sidebar-link">虚拟DOM(Virtual DOM)</a></li><li class="sidebar-sub-header"><a href="/vuepress-blog/虚拟DOM与DIFF算法.html#diff算法" class="sidebar-link">Diff算法</a></li></ul></li><li><a href="/vuepress-blog/详解mixins混入使用.html" class="sidebar-link">详解mixins混入使用</a></li><li><a href="/vuepress-blog/金额输入框封装（千分位，禁止中文输入）.html" class="sidebar-link">金额输入框封装（千分位，禁止中文输入）</a></li><li><a href="/vuepress-blog/键盘事件keydown，keypress，keyup.html" class="sidebar-link">键盘事件keydown，keypress，keyup</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="虚拟dom-virtual-dom"><a href="#虚拟dom-virtual-dom" class="header-anchor">#</a> 虚拟DOM(Virtual DOM)</h2> <h3 id="什么是虚拟dom"><a href="#什么是虚拟dom" class="header-anchor">#</a> 什么是虚拟DOM</h3> <p>一句话总结虚拟DOM就是一个用来描述真实DOM的**javaScript对象 ** 包含tag，props，children三个属性。。。</p> <p><code>真实DOM</code>:</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;ul class=&quot;list&quot;&gt;
+    &lt;li&gt;a&lt;/li&gt;
+    &lt;li&gt;b&lt;/li&gt;
+    &lt;li&gt;c&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre></div><p><code>对应的虚拟DOM</code>:</p> <div class="language- extra-class"><pre class="language-text"><code>let vnode = h('ul.list', [
+  h('li','a'),
+  h('li','b'),
+  h('li','c'),
+])
+
+console.log(vnode)
+</code></pre></div><h4 id="控制台打印出来的vnode"><a href="#控制台打印出来的vnode" class="header-anchor">#</a> 控制台打印出来的<strong>Vnode</strong>:</h4> <img src="https://fengqichang666.github.io/images/640.webp" style="zoom:50%;"> <p><strong>h函数就是vue中的createElement方法，这个函数作用就是创建虚拟dom，追踪dom变化的</strong></p> <div class="language- extra-class"><pre class="language-text"><code>function h(tag,props,...children){//h函数，返回一个虚拟dom对象
+    return {
+        tag,
+        props:props || {},
+        children:children.flat()//扁平化数组，降至一维数组
+    }
+}
+//源码
+export function h (sel: string): VNode
+export function h (sel: string, data: VNodeData | null): VNode
+export function h (sel: string, children: VNodeChildren): VNode
+export function h (sel: string, data: VNodeData | null, children: VNodeChildren): VNode
+export function h (sel: any, b?: any, c?: any): VNode {
+  var data: VNodeData = {}
+  var children: any
+  var text: any
+  var i: number
+    ...
+  return vnode(sel, data, children, text, undefined) //最终返回一个vnode函数
+};
+// vnode函数
+export function vnode (sel: string | undefined,
+  data: any | undefined,
+  children: Array&lt;VNode | string&gt; | undefined,
+  text: string | undefined,
+  elm: Element | Text | undefined): VNode {
+  const key = data === undefined ? undefined : data.key
+  return { sel, data, children, text, elm, key } //最终生成Vnode对象
+}
+</code></pre></div><p><code>h函数</code>先生成一个<code>vnode</code>函数,然后<code>vnode</code>函数再生成一个<code>Vnode</code>对象(虚拟DOM对象)</p> <p><strong>最终html代码会被编译成h函数的渲染形式。返回的是一个虚拟DOM对象，通过diff算法，来追踪自己要如何改变真实DOM。</strong></p> <p>createElment参数（也就是h函数）：createElment函数接受三个参数，分别是：</p> <div class="language- extra-class"><pre><code> 参数一：tag（标签名）、组件的选项对象、函数（必选）；
+
+ 参数二：一个对象，标签的属性对应的数据（可选）；
+
+ 参数三：子级虚拟节点，字符串形式或数组形式，子级虚拟节点也需要使用createElement构建。
+</code></pre></div><h3 id="为什么要使用虚拟dom"><a href="#为什么要使用虚拟dom" class="header-anchor">#</a> 为什么要使用虚拟DOM</h3> <ul><li><p>MVVM框架解决视图和状态同步问题</p></li> <li><p>模板引擎可以简化视图操作,没办法跟踪状态</p></li> <li><p>虚拟DOM跟踪状态变化</p></li> <li><p>参考github上<strong>virtual-dom</strong>[1]的动机描述</p></li> <li><ul><li>虚拟DOM可以维护程序的状态,跟踪上一次的状态</li> <li>通过比较前后两次状态差异更新真实DOM</li></ul></li> <li><p>跨平台使用</p></li> <li><ul><li>浏览器平台渲染DOM</li> <li>服务端渲染SSR(Nuxt.js/Next.js),前端是vue向,后者是react向</li> <li>原生应用(Weex/React Native)</li> <li>小程序(mpvue/uni-app)等</li></ul></li> <li><p>真实DOM的属性很多，创建DOM节点开销很大</p></li> <li><p>虚拟DOM只是普通JavaScript对象，描述属性并不需要很多，创建开销很小</p></li> <li><p><strong>复杂视图情况下提升渲染性能</strong>(操作dom性能消耗大,减少操作dom的范围可以提升性能)</p></li></ul> <p><strong>复杂视图情况下提升渲染性能</strong>,因为<code>虚拟DOM+Diff算法</code>可以精准找到DOM树变更的地方,减少DOM的操作(重排重绘)</p> <h2 id="diff算法"><a href="#diff算法" class="header-anchor">#</a> Diff算法</h2> <p>diff 算法首先要明确一个概念就是 Diff 的对象是虚拟DOM（virtual dom），更新真实 DOM 是 Diff 算法的结果。</p> <ul><li><code>init()</code>设置模块.创建<code>patch()</code>函数</li> <li>使用<code>h()</code>函数创建JavaScript对象<code>(Vnode)</code>描述<code>真实DOM</code></li> <li><code>patch()</code>比较<code>新旧两个Vnode</code></li> <li>把变化的内容更新到<code>真实DOM树</code></li></ul> <h3 id="init函数"><a href="#init函数" class="header-anchor">#</a> init函数</h3> <p>init函数时设置模块,然后创建patch()函数,我们先通过场景案例来有一个直观的体现:</p> <div class="language- extra-class"><pre class="language-text"><code>import {init} from 'snabbdom/build/package/init.js'
+import {h} from 'snabbdom/build/package/h.js'
+
+// 1.导入模块
+import {styleModule} from &quot;snabbdom/build/package/modules/style&quot;;
+import {eventListenersModule} from &quot;snabbdom/build/package/modules/eventListeners&quot;;
+
+// 2.注册模块
+const patch = init([
+  styleModule,
+  eventListenersModule
+])
+
+// 3.使用h()函数的第二个参数传入模块中使用的数据(对象)
+let vnode = h('div', [
+  h('h1', {style: {backgroundColor: 'red'}}, 'Hello world'),
+  h('p', {on: {click: eventHandler}}, 'Hello P')
+])
+
+function eventHandler() {
+  alert('疼,别摸我')
+}
+
+const app = document.querySelector('#app')
+
+patch(app,vnode)
+</code></pre></div><p>当init使用了导入的模块就能够在h函数中用这些模块提供的api去创建<code>虚拟DOM(Vnode)对象</code>;在上文中就使用了<code>样式模块</code>以及<code>事件模块</code>让创建的这个虚拟DOM具备样式属性以及事件属性,最终通过<code>patch函数</code>对比<code>两个虚拟dom</code>(会先把app转换成虚拟dom),更新视图;</p> <h3 id="patch函数-核心"><a href="#patch函数-核心" class="header-anchor">#</a> patch函数(核心)</h3> <ul><li>pactch(oldVnode,newVnode)</li> <li>把新节点中变化的内容渲染到真实DOM,最后返回新节点作为下一次处理的旧节点(核心)</li> <li>对比新旧<code>VNode</code>是否相同节点(节点的key和sel相同)</li> <li>如果不是相同节点,删除之前的内容,重新渲染</li> <li>如果是相同节点,再判断新的<code>VNode</code>是否有<code>text</code>,如果有并且和<code>oldVnode</code>的<code>text</code>不同直接更新文本内容<code>(patchVnode)</code></li> <li>如果新的VNode有children,判断子节点是否有变化<code>(updateChildren,最麻烦,最难实现)</code></li></ul> <div class="language- extra-class"><pre class="language-text"><code>return function patch(oldVnode: VNode | Element, vnode: VNode): VNode {    
+    let i: number, elm: Node, parent: Node
+    const insertedVnodeQueue: VNodeQueue = []
+    // cbs.pre就是所有模块的pre钩子函数集合
+    for (i = 0; i &lt; cbs.pre.length; ++i) cbs.pre[i]()
+    // isVnode函数时判断oldVnode是否是一个虚拟DOM对象
+    if (!isVnode(oldVnode)) {
+        // 若不是即把Element转换成一个虚拟DOM对象
+        oldVnode = emptyNodeAt(oldVnode)
+    }
+    // sameVnode函数用于判断两个虚拟DOM是否是相同的,源码见补充1;
+    if (sameVnode(oldVnode, vnode)) {
+        // 相同则运行patchVnode对比两个节点,关于patchVnode后面会重点说明(核心)
+        patchVnode(oldVnode, vnode, insertedVnodeQueue)
+    } else {
+        elm = oldVnode.elm! // !是ts的一种写法代码oldVnode.elm肯定有值
+        // parentNode就是获取父元素
+        parent = api.parentNode(elm) as Node
+
+        // createElm是用于创建一个dom元素插入到vnode中(新的虚拟DOM)
+        createElm(vnode, insertedVnodeQueue)
+
+        if (parent !== null) {
+            // 把dom元素插入到父元素中,并且把旧的dom删除
+            api.insertBefore(parent, vnode.elm!, api.nextSibling(elm))// 把新创建的元素放在旧的dom后面
+            removeVnodes(parent, [oldVnode], 0, 0)
+        }
+    }
+
+    for (i = 0; i &lt; insertedVnodeQueue.length; ++i) {
+        insertedVnodeQueue[i].data!.hook!.insert!(insertedVnodeQueue[i])
+    }
+    for (i = 0; i &lt; cbs.post.length; ++i) cbs.post[i]()
+    return vnode
+}
+</code></pre></div><h4 id="补充1-samevnode函数"><a href="#补充1-samevnode函数" class="header-anchor">#</a> 补充1: sameVnode函数</h4> <div class="language- extra-class"><pre class="language-text"><code>function sameVnode(vnode1: VNode, vnode2: VNode): boolean { 通过key和sel选择器判断是否是相同节点
+    return vnode1.key === vnode2.key &amp;&amp; vnode1.sel === vnode2.sel
+}
+</code></pre></div><h3 id="patchvnode"><a href="#patchvnode" class="header-anchor">#</a> patchVnode</h3> <ul><li>第一阶段触发<code>prepatch</code>函数以及<code>update</code>函数(都会触发prepatch函数,两者不完全相同才会触发update函数)</li> <li>第二阶段,真正对比新旧<code>vnode</code>差异的地方</li> <li>第三阶段,触发<code>postpatch</code>函数更新节点</li></ul> <div class="language- extra-class"><pre class="language-text"><code>function patchVnode(oldVnode: VNode, vnode: VNode, insertedVnodeQueue: VNodeQueue) {
+    const hook = vnode.data?.hook
+    hook?.prepatch?.(oldVnode, vnode)
+    const elm = vnode.elm = oldVnode.elm!
+    const oldCh = oldVnode.children as VNode[]
+    const ch = vnode.children as VNode[]
+    if (oldVnode === vnode) return
+    if (vnode.data !== undefined) {
+        for (let i = 0; i &lt; cbs.update.length; ++i) cbs.update[i](oldVnode, vnode)
+        vnode.data.hook?.update?.(oldVnode, vnode)
+    }
+    if (isUndef(vnode.text)) { // 新节点的text属性是undefined
+        if (isDef(oldCh) &amp;&amp; isDef(ch)) { // 当新旧节点都存在子节点
+            if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue) //并且他们的子节点不相同执行updateChildren函数,后续会重点说明(核心)
+        } else if (isDef(ch)) { // 只有新节点有子节点
+            // 当旧节点有text属性就会把''赋予给真实dom的text属性
+            if (isDef(oldVnode.text)) api.setTextContent(elm, '') 
+            // 并且把新节点的所有子节点插入到真实dom中
+            addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)
+        } else if (isDef(oldCh)) { // 清除真实dom的所有子节点
+            removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+        } else if (isDef(oldVnode.text)) { // 把''赋予给真实dom的text属性
+            api.setTextContent(elm, '')
+        }
+    } else if (oldVnode.text !== vnode.text) { //若旧节点的text与新节点的text不相同
+        if (isDef(oldCh)) { // 若旧节点有子节点,就把所有的子节点删除
+            removeVnodes(elm, oldCh, 0, oldCh.length - 1)
+        }
+        api.setTextContent(elm, vnode.text!) // 把新节点的text赋予给真实dom
+    }
+    hook?.postpatch?.(oldVnode, vnode) // 更新视图
+}
+</code></pre></div><p><img src="https://fengqichang666.github.io/images/Diff.webp" alt=""></p> <h3 id="updatechildren-核中核-判断子节点的差异"><a href="#updatechildren-核中核-判断子节点的差异" class="header-anchor">#</a> updateChildren(核中核:判断子节点的差异)</h3> <p>这个函数分为三个部分,<code>部分1:声明变量</code>,<code>部分2:同级别节点比较</code>,<code>部分3:循环结束的收尾工作</code></p> <ul><li><p><code>同级别节点比较</code>的<code>五种</code>情况:</p></li> <li><ol><li><code>oldStartVnode/newStartVnode</code>(旧开始节点/新开始节点)相同</li> <li><code>oldEndVnode/newEndVnode</code>(旧结束节点/新结束节点)相同</li> <li><code>oldStartVnode/newEndVnode</code>(旧开始节点/新结束节点)相同</li> <li><code>oldEndVnode/newStartVnode</code>(旧结束节点/新开始节点)相同</li> <li><code>特殊情况当1,2,3,4的情况都不符合</code>的时候就会执行,在<code>oldVnodes</code>里面寻找跟<code>newStartVnode</code>一样的节点然后位移到<code>oldStartVnode</code>,若没有找到在就<code>oldStartVnode</code>创建一个</li></ol></li> <li><p>执行过程是一个循环,在每次循环里,只要执行了上述的情况的五种之一就会结束一次循环</p></li> <li><p><code>循环结束的收尾工作</code>:直到oldStartIdx&gt;oldEndIdx || newStartIdx&gt;newEndIdx(代表旧节点或者新节点已经遍历完)</p></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vuepress-blog/网站、论坛合集.html" class="prev">
+        网站、论坛合集
+      </a></span> <span class="next"><a href="/vuepress-blog/详解mixins混入使用.html">
+        详解mixins混入使用
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vuepress-blog/assets/js/app.60d19d74.js" defer></script><script src="/vuepress-blog/assets/js/2.eeb24f79.js" defer></script><script src="/vuepress-blog/assets/js/45.693564e6.js" defer></script>
+  </body>
+</html>

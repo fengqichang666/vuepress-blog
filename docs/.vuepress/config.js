@@ -14,7 +14,7 @@ module.exports = {
 			{
 				title: '列表', // 必要的
 				collapsable: false, // 可选的, 默认值是 true,
-				children,
+				children:[encodeURI('/常用的正则表达式大全')],
 			},
 			// {
 			// 	title: 'vue2', // 必要的
