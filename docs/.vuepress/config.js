@@ -8,7 +8,7 @@ const children = require('../sidebar')
 module.exports = {
 	title: '前端笔记',
 	description: '前端笔记',
-    base: '/',
+    base: '/vuepress-blog/',
 	themeConfig: {
 		sidebar: [
 			{
