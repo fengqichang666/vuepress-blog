@@ -21,15 +21,7 @@ module.exports = {
 			// 	// path: '/vue2/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
 			// 	collapsable: false, // 可选的, 默认值是 true,
 			// 	children:[]
-			// },
-			// {
-			// 	title: 'vue3',
-			// 	collapsable: false, // 可选的, 默认值是 true,
-			// 	children: [
-			// 		/* ... */
-			// 	],
-			// 	initialOpenGroupIndex: -1, // 可选的, 默认值是 0
-			// },
+			// }
 		],
 	},
 }
