@@ -1350,7 +1350,7 @@ appear
 
 ```
 <transition-group>
-     <div style="margin: 10px;" :key="item" v-for="item in list">{{ item }</div>
+     <div style="margin: 10px;" :key="item" v-for="item in list">{{ item }}</div>
 </transition-group>
 ```
 
