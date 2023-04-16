@@ -1,7 +1,7 @@
 ---
 title: vue3笔记
 date: 2022-12-15 15:00:16
-tags:
+tags: vue3
 ---
 
 ## Vue3 新特性介绍

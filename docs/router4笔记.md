@@ -1,7 +1,7 @@
 ---
 title: router4笔记
 date: 2022-12-21 17:02:33
-tags:
+tags: router4笔记
 ---
 
 # 安装

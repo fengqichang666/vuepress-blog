@@ -1,7 +1,7 @@
 ---
 title: 单点登录SSO
 date: 2023-01-11 13:56:41
-tags:
+tags: SSO
 ---
 
 # 单点登录（SSO）Single Sign On

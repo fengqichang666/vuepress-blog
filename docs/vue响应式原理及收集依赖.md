@@ -1,7 +1,7 @@
 ---
 title: vue响应式原理、依赖收集
 date: 2023-02-23 09:38:38
-tags:
+tags: vue响应式原理、依赖收集
 ---
 
 ![vue原理图](https://fengqichang666.github.io/images/vueDep.png)

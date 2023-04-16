@@ -1,7 +1,7 @@
 ---
-title: 'Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick'
+title: Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick
 date: 2021-09-24 15:33:37
-tags:
+tags: Vue
 ---
 
 ## 1.Vue.extend

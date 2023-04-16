@@ -1,8 +1,7 @@
 ---
-layout: JS工具函数
-title: 工具函数
+title: JS工具函数
 date: 2023-01-11 17:09:41
-tags:
+tags: JS工具函数
 ---
 
 ## 1、校验数据类型

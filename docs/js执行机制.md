@@ -1,7 +1,7 @@
 ---
 title: js执行机制
 date: 2022-09-22 16:08:28
-tags:
+tags: js执行机制
 ---
 
 ![js执行机制](https://fengqichang666.github.io/images/20200618180003244.jpg)
