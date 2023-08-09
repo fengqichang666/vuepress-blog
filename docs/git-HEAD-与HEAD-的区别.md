@@ -1,7 +1,6 @@
 ---
 title: git HEAD~与HEAD^的区别
 date: 2022-11-15 14:17:58
-tags: HEAD~与HEAD^的区别
 ---
 
 - HEAD~ 表示祖先

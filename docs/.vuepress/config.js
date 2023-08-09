@@ -23,5 +23,9 @@ module.exports = {
 			// 	children:[]
 			// }
 		]
-	}
+	},
+    plugins: [
+        // ...
+        ['vuepress-plugin-side-anchor']
+    ]
 }

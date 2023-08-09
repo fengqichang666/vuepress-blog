@@ -1,10 +1,9 @@
 ---
 title: js执行机制
 date: 2022-09-22 16:08:28
-tags: js执行机制
 ---
 
-![js执行机制](https://fengqichang666.github.io/images/20200618180003244.jpg)
+![js执行机制](https://fengqichang666.github.io/images/20200618180003244.png)
 
 # Heap(堆)、Stack(栈)、Queue(队列)、Event Loop(事件循环)
 

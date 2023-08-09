@@ -1,7 +1,6 @@
 ---
 title: 键盘事件keydown，keypress，keyup
 date: 2022-07-17 11:46:10
-tags: 键盘事件
 ---
 
 ### 一、键盘事件基础

@@ -1,7 +1,6 @@
 ---
 title: pinia
 date: 2022-12-22 10:55:10
-tags: pinia
 ---
 
 [Pinia](https://so.csdn.net/so/search?q=Pinia&spm=1001.2101.3001.7020).js 有如下特点：

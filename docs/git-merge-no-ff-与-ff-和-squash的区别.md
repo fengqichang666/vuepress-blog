@@ -1,7 +1,6 @@
 ---
 title: git merge --no-ff 与--ff 和--squash的区别
 date: 2022-06-19 11:18:58
-tags: --no-ff 与--ff 和--squash的区别
 ---
 
 推荐在合并分支时，，加上 `--no-ff` 参数，会生成一个新的commit，用于查看这次合并的差异了：`--no-ff` 在这的作用是禁止快进式合并。

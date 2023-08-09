@@ -1,7 +1,6 @@
 ---
 title: vue知识点记录
 date: 2021-12-08 15:23:24
-tag: vue知识点记录
 ---
 
 ### `vue style scoped`，子组件的根节点依然受其父组件的CSS 的影响

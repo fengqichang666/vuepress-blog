@@ -1,7 +1,6 @@
 ---
 title: vue组件通信
 date: 2021-07-20 11:00:15
-tags: vue组件通信
 ---
 
 ## 方法一、`props`/`$emit`

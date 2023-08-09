@@ -11,7 +11,7 @@
   "author": "fqc",
   "license": "ISC",
   "devDependencies": {
-    "vuepress": "^1.9.7"
-  },
-  "dependencies": {}
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-side-anchor": "^1.0.6"
+  }
 }

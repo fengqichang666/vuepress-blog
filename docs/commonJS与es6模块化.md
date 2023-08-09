@@ -1,7 +1,6 @@
 ---
 title: exports、module.exports和export、export default
 date: 2021-10-25 13:41:29
-tags: export
 ---
 
 ```

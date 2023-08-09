@@ -1,7 +1,6 @@
 ---
 title: vue3+elementplus+ts+pinia踩坑记录
 date: 2021-12-08 15:23:24
-tag: vue3+elementplus+ts+pinia踩坑记录
 ---
 
 ## element-plus单选框无法更改问题

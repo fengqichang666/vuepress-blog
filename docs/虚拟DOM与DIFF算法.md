@@ -1,7 +1,6 @@
 ---
 title: 虚拟DOM与DIFF算法
 date: 2021-10-08 16:57:02
-tags: 虚拟DOM与DIFF算法
 ---
 
 ## 虚拟DOM(Virtual DOM)

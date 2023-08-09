@@ -1,7 +1,6 @@
 ---
 title: vuex
 date: 2021-11-25 15:56:11
-tags: vuex
 ---
 
 ## `Vuex`的核心概念

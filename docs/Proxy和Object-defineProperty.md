@@ -1,7 +1,6 @@
 ---
 title: Proxy和Object.defineProperty
 date: 2021-07-07 10:31:00
-tags: Proxy和Object.defineProperty
 ---
 
 ## **Object.defineProperty**

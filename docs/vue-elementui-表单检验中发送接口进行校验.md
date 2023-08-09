@@ -1,7 +1,6 @@
 ---
 title: vue+elementui 表单检验中发送接口进行校验
 date: 2022-09-19 19:30:51
-tags: vue+elementui 表单检验中发送接口进行校验
 ---
 
 ## 使用场景
