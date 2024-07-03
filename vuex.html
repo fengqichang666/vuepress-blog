@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vuex | 前端笔记</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="前端笔记">
+    
+    <link rel="preload" href="/vuepress-blog/assets/css/0.styles.e0cecbec.css" as="style"><link rel="preload" href="/vuepress-blog/assets/js/app.0947dbc9.js" as="script"><link rel="preload" href="/vuepress-blog/assets/js/2.9d54d2e6.js" as="script"><link rel="preload" href="/vuepress-blog/assets/js/27.c50ef18f.js" as="script"><link rel="prefetch" href="/vuepress-blog/assets/js/10.9cfc9567.js"><link rel="prefetch" href="/vuepress-blog/assets/js/11.3d077320.js"><link rel="prefetch" href="/vuepress-blog/assets/js/12.39f7ba05.js"><link rel="prefetch" href="/vuepress-blog/assets/js/13.bd5ca7c4.js"><link rel="prefetch" href="/vuepress-blog/assets/js/14.069d974e.js"><link rel="prefetch" href="/vuepress-blog/assets/js/15.d6d34b6f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/16.661f4a7c.js"><link rel="prefetch" href="/vuepress-blog/assets/js/17.0096b720.js"><link rel="prefetch" href="/vuepress-blog/assets/js/18.ea7d075a.js"><link rel="prefetch" href="/vuepress-blog/assets/js/19.dda8cf70.js"><link rel="prefetch" href="/vuepress-blog/assets/js/20.bbb6e4a0.js"><link rel="prefetch" href="/vuepress-blog/assets/js/21.5c7b6bab.js"><link rel="prefetch" href="/vuepress-blog/assets/js/22.a58ff1d8.js"><link rel="prefetch" href="/vuepress-blog/assets/js/23.92f18123.js"><link rel="prefetch" href="/vuepress-blog/assets/js/24.98a50d67.js"><link rel="prefetch" href="/vuepress-blog/assets/js/25.91a3e6c3.js"><link rel="prefetch" href="/vuepress-blog/assets/js/26.b9d79099.js"><link rel="prefetch" href="/vuepress-blog/assets/js/28.ecd67280.js"><link rel="prefetch" href="/vuepress-blog/assets/js/29.44f0800f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/3.5393f454.js"><link rel="prefetch" href="/vuepress-blog/assets/js/30.c1d65828.js"><link rel="prefetch" href="/vuepress-blog/assets/js/31.d1281d8d.js"><link rel="prefetch" href="/vuepress-blog/assets/js/32.8a00952e.js"><link rel="prefetch" href="/vuepress-blog/assets/js/33.e5857412.js"><link rel="prefetch" href="/vuepress-blog/assets/js/34.cc2a8fd0.js"><link rel="prefetch" href="/vuepress-blog/assets/js/35.0c7488f5.js"><link rel="prefetch" href="/vuepress-blog/assets/js/36.5b7ee302.js"><link rel="prefetch" href="/vuepress-blog/assets/js/37.4df98777.js"><link rel="prefetch" href="/vuepress-blog/assets/js/38.9072547a.js"><link rel="prefetch" href="/vuepress-blog/assets/js/39.27723f7b.js"><link rel="prefetch" href="/vuepress-blog/assets/js/4.c72729ae.js"><link rel="prefetch" href="/vuepress-blog/assets/js/40.05568b60.js"><link rel="prefetch" href="/vuepress-blog/assets/js/41.22bef9bc.js"><link rel="prefetch" href="/vuepress-blog/assets/js/42.78ead8bc.js"><link rel="prefetch" href="/vuepress-blog/assets/js/43.d6a8f93b.js"><link rel="prefetch" href="/vuepress-blog/assets/js/44.b463d848.js"><link rel="prefetch" href="/vuepress-blog/assets/js/45.507f6c29.js"><link rel="prefetch" href="/vuepress-blog/assets/js/46.05a73236.js"><link rel="prefetch" href="/vuepress-blog/assets/js/47.b423c42f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/48.3dd4dd00.js"><link rel="prefetch" href="/vuepress-blog/assets/js/5.44547aad.js"><link rel="prefetch" href="/vuepress-blog/assets/js/6.18c29f84.js"><link rel="prefetch" href="/vuepress-blog/assets/js/7.1f43074c.js"><link rel="prefetch" href="/vuepress-blog/assets/js/8.a3e3bbda.js"><link rel="prefetch" href="/vuepress-blog/assets/js/9.7fbdd959.js">
+    <link rel="stylesheet" href="/vuepress-blog/assets/css/0.styles.e0cecbec.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vuepress-blog/" class="home-link router-link-active"><!----> <span class="site-name">前端笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>列表</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vuepress-blog/commonJS与es6模块化.html" class="sidebar-link">exports、module.exports和export、export default</a></li><li><a href="/vuepress-blog/eslint使用、报错部分快速修复.html" class="sidebar-link">vue-cli中eslint检验指定文件/夹、报错部分快速修复</a></li><li><a href="/vuepress-blog/git-HEAD-与HEAD-的区别.html" class="sidebar-link">git HEAD~与HEAD^的区别</a></li><li><a href="/vuepress-blog/git-merge-no-ff-与-ff-和-squash的区别.html" class="sidebar-link">git merge --no-ff 与--ff 和--squash的区别</a></li><li><a href="/vuepress-blog/Git凭据管理的三种方式-https.html" class="sidebar-link">Git凭据管理的三种方式(https)</a></li><li><a href="/vuepress-blog/git操作指令.html" class="sidebar-link">git命令总结</a></li><li><a href="/vuepress-blog/JS工具函数.html" class="sidebar-link">JS工具函数</a></li><li><a href="/vuepress-blog/js执行机制.html" class="sidebar-link">js执行机制</a></li><li><a href="/vuepress-blog/nodejs-websocket.html" class="sidebar-link">nodejs-websocket</a></li><li><a href="/vuepress-blog/pinia.html" class="sidebar-link">pinia</a></li><li><a href="/vuepress-blog/Proxy和Object-defineProperty.html" class="sidebar-link">Proxy和Object.defineProperty</a></li><li><a href="/vuepress-blog/react笔记.html" class="sidebar-link">react笔记</a></li><li><a href="/vuepress-blog/router4笔记.html" class="sidebar-link">router4笔记</a></li><li><a href="/vuepress-blog/uniapp笔记.html" class="sidebar-link">uniapp笔记</a></li><li><a href="/vuepress-blog/vite与webpack.html" class="sidebar-link">vite与webpack</a></li><li><a href="/vuepress-blog/vue-elementui-表单检验中发送接口进行校验.html" class="sidebar-link">vue+elementui 表单检验中发送接口进行校验</a></li><li><a href="/vuepress-blog/vue3+elementplus+ts+pinia踩坑记录.html" class="sidebar-link">vue3+elementplus+ts+pinia踩坑记录</a></li><li><a href="/vuepress-blog/vue3笔记.html" class="sidebar-link">vue3笔记</a></li><li><a href="/vuepress-blog/vuex.html" aria-current="page" class="active sidebar-link">vuex</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vuepress-blog/vuex.html#vuex的核心概念" class="sidebar-link">Vuex的核心概念</a></li></ul></li><li><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html" class="sidebar-link">Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick</a></li><li><a href="/vuepress-blog/vue响应式原理及收集依赖.html" class="sidebar-link">vue响应式原理、依赖收集</a></li><li><a href="/vuepress-blog/vue对数组的处理.html" class="sidebar-link">vue对数组的处理</a></li><li><a href="/vuepress-blog/vue知识点记录.html" class="sidebar-link">vue知识点记录</a></li><li><a href="/vuepress-blog/vue第三方组件css修改.html" class="sidebar-link">vue第三方组件css修改</a></li><li><a href="/vuepress-blog/vue组件通信.html" class="sidebar-link">vue组件通信</a></li><li><a href="/vuepress-blog/webpack笔记.html" class="sidebar-link">webpack笔记</a></li><li><a href="/vuepress-blog/前端学习资料.html" class="sidebar-link">前端学习资料</a></li><li><a href="/vuepress-blog/前端性能优化面试题.html" class="sidebar-link">前端性能优化面试题总结</a></li><li><a href="/vuepress-blog/前端鉴权cookie、session、token、jwt、单点登录.html" class="sidebar-link">前端鉴权cookie、session、token、jwt、单点登录</a></li><li><a href="/vuepress-blog/单点登录SSO.html" class="sidebar-link">单点登录SSO</a></li><li><a href="/vuepress-blog/原型链.html" class="sidebar-link">原型链</a></li><li><a href="/vuepress-blog/常用的正则表达式大全.html" class="sidebar-link">常用的正则表达式大全</a></li><li><a href="/vuepress-blog/开发中容易遇到的问题.html" class="sidebar-link">开发中容易遇到的问题</a></li><li><a href="/vuepress-blog/数据类型判断.html" class="sidebar-link">数据类型判断</a></li><li><a href="/vuepress-blog/样式清单整理.html" class="sidebar-link">样式清单整理</a></li><li><a href="/vuepress-blog/组件库开发.html" class="sidebar-link">组件库开发</a></li><li><a href="/vuepress-blog/网站、论坛合集.html" class="sidebar-link">网站、论坛合集</a></li><li><a href="/vuepress-blog/虚拟DOM与DIFF算法.html" class="sidebar-link">虚拟DOM与DIFF算法</a></li><li><a href="/vuepress-blog/详解mixins混入使用.html" class="sidebar-link">详解mixins混入使用</a></li><li><a href="/vuepress-blog/金额输入框封装（千分位，禁止中文输入）.html" class="sidebar-link">金额输入框封装（千分位，禁止中文输入）</a></li><li><a href="/vuepress-blog/键盘事件keydown，keypress，keyup.html" class="sidebar-link">键盘事件keydown，keypress，keyup</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="vuex的核心概念"><a href="#vuex的核心概念" class="header-anchor">#</a> <code>Vuex</code>的核心概念</h2> <h3 id="state"><a href="#state" class="header-anchor">#</a> State</h3> <p>是<code>Vuex</code>用来存储数据的地方，存储在state中数据可以看做是当前应用的全局变量可以在当前应用的任何地方访问。</p> <blockquote><p>1.是<code>Vuex</code>用来存储数据的地方，存储在state中数据可以看做是当前应用的全局变量可以在当前应用的任何地方访问。</p> <p>2.在开发中我们推荐将store中的state赋值给需要使用该状态的组件的计算属性中(一定不能把state赋值给data,state发生改变时不会重新给data赋值)</p> <p>3.<code>Vuex</code> 为了简化 state与计算属性配合使用时的代码,提供了一个辅助函数<code>mapState</code> 可以简化上面的写法</p> <div class="language- extra-class"><pre class="language-text"><code>// 首先引入辅助函数mapState
+import {mapState} from 'vuex'
+ /*
+ computed: {
+ 	book() {
+    		return this.$store.state.book;
+    	},
+ }*/
+    
+    // 下面的写法等价于上面的写法
+computed: {
+      ...mapState(['book'])
+   }
+
+</code></pre></div></blockquote> <h3 id="getters"><a href="#getters" class="header-anchor">#</a> Getters</h3> <p>getter就是<code>Vuex</code>的计算属性，开发人员可以将state 或其他getter 计算后的的返回值存放在指定getter中,当前getter会将这些依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。可以认为是 store 的计算属性</p> <div class="language- extra-class"><pre class="language-text"><code>state: {
+    todos: [
+      { id: 1, text: '...', done: true },
+      { id: 2, text: '...', done: false }
+    ]
+  },
+ // Getter 接受 state 作为其第一个参数
+  getters: {
+    doneTodos: state =&gt; {
+      return state.todos.filter(todo =&gt; todo.done)
+    }
+  }
+  //Getter 会暴露为 store.getters 对象，你可以以属性的形式访问这些值：
+  store.getters.doneTodos // -&gt; [{ id: 1, text: '...', done: true }]
+  //Getter 也可以接受其他 getter 作为第二个参数：
+  getters: {
+      // ...
+      doneTodosCount: (state, getters) =&gt; {
+        return getters.doneTodos.length
+      }
+    }
+  
+</code></pre></div><p>在任何组件中都可以通过<code>this.$store.getter.</code>属性名访问</p> <ol><li><p>getter在组件中依然存放在组建的计算属性中</p> <div class="language- extra-class"><pre class="language-text"><code>computed: {
+        score() {
+          return this.$store.getters.calcScore;
+        }
+    }
+</code></pre></div></li> <li><p><code>Vuex</code>为 getters 同样提供了辅助函数 <code>mapGetters</code></p> <div class="language- extra-class"><pre class="language-text"><code>方法一: mapState可以接收一个字符串数组作为参数,数组中的每一项字符串都会成为当前组件的计算属性并且与Vuex中的同名getter建立映射对应关系。
+ computed: {
+ 	...mapGetters([&quot;calcScore&quot;])
+ }
+方法二: mapGetters可以接收对象作为参数,对象的每一个key都会成为当前组件的计算属性名,value必须是一个字符串并且与Vuex中的同名getter建立映射对应关系。
+computed: {
+	...mapGetters({
+		s1: 'calcScore'
+	})
+}
+</code></pre></div></li></ol> <h3 id="mutations"><a href="#mutations" class="header-anchor">#</a> Mutations</h3> <p><code>vuex</code>规定mutation是唯一可以修改state的地方</p> <div class="language- extra-class"><pre class="language-text"><code>  mutations: { // 修改state的方法
+    // 同步操作 直接修改
+    changeBook(state, book) {
+      state.book = book;
+    },
+}
+</code></pre></div><p>在组件中必须使用<code>$store.commit</code>方法提交指定mutation,指定mutation才会触发</p> <div class="language- extra-class"><pre class="language-text"><code>methods: {
+        // 执行该方法会将state中的book变成JavaScript,而不是最开始的HTML+CSS
+        changeBookByCommit() {
+            // 触发mutation必须使用$store所提供的commit方法提交一次mutation
+            // commit 方法接收两个参数 参数一 需要触发mutation的函数名 参数二 载荷(传参/提交给mutation的参数)
+            //注意: commit只能接受两个参数,如果你想要的传递多个参数时,请将载荷作为对象提交
+            this.$store.commit(&quot;changeBook&quot;, &quot;JavaScript&quot;);
+        }
+    }
+
+</code></pre></div><blockquote><p>注意: Mutation 需遵守 Vue 的响应规则 Vuex 的 store 中的状态是响应式的，那么当我们变更状态时，监视状态的 Vue 组件也会自动更新。这也意味着 Vuex 中的 mutation 也需要与使用 Vue 一样遵守一些注意事项：</p> <p>1、最好提前在你的 store 中初始化好所有所需state属性。</p> <p>2、当需要在对象上添加新属性时，你应该使用 Vue.set(obj, 'newProp', 123), 或者以新对象替换老对象</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code> mutations: {
+        addCount(state) {
+            state.count ++
+        },
+        setArr(state) {
+            // vuex 依然遵循响应式原则,在vue的响应式原则中,通过下标修改添加数组的其中一项是不会引起页面更新
+            // state.arr[0] = 'A'
+            // vuex没有this,所以只能先 import Vue,在使用Vue.set方法修改数组
+            Vue.set(state.arr, 0 , 'A')
+            // 以新对象替换老对象方法引起引用数据类型响应变化
+            state.arr = state.arr.map((item,index) =&gt; {
+                if(index === 0) {
+                    return 'AA'
+                }
+                return item
+            })
+
+        },
+        setObj(state) {
+            // state.obj.address = 'hz'  // Error 直接给对象通过key添加属性也不会引起页面更新
+            Vue.set(state.obj,'address', 'gz' )
+            
+             state.obj = {
+                ...state.obj,
+                address: '广州'
+            }
+        }
+    }
+
+</code></pre></div><blockquote><p>注意1: Mutation 内部只允许同步操作,原因在vuex中mutation是唯一可以修改state的地方,所以开发中我们有时会对mutation进行数据追踪观察state是否按照预期发生改变,这样做的化就可以在开发中捕获大量的错误,如果mutation允许异步操作的话,就会导致我们的数据追踪变得混乱不可查阅。</p> <p>2:因为每次提交mutation都是传入commit函数一个同名mutation字符串，这样的操作有时会导致提交字符串与mutation名不一致导致指定mutation没有被提交，这个问题尤其会出现在多人开发中。为了避免该问题vuex推荐专门创建一个名为 mutation-types.js 文件存储当前应用中所有的mutation名,开发人员就可以使用变量的方式声明提交指定的mutation了</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>export const ADD_CURRENT_COUNT = 'ADD_CURRENT_COUNT'
+
+export const SET_ARR = 'SET_ARR'
+
+export const SET_OBJ = 'SET_OBJ'
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>// store中的mutation全部使用 mutation-types声明好的常量作为函数名
+import Vue from 'vue'
+import Vuex from 'vuex'
+import * as types from './mutation-types'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+    mutations: {
+        // ES6 动态键名 将mutation-types中 声明好的常量作为当前mutation的函数名
+        [types.ADD_CURRENT_COUNT](state, num) {
+               // some code...
+        },
+        [types.SET_ARR](state, {index, value}) {
+              // some code...
+        },
+        [types.SET_OBJ](state) {
+            // some code...
+        }
+    }
+})
+
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>// 组件调用这些mutation时 直接通过引入对应的mutation-types常量
+&lt;script&gt;
+import {ADD_CURRENT_COUNT, SET_ARR, SET_OBJ} from '../store/mutation-types'
+
+export default {
+    methods: {
+        setStateCount() {
+            this.$store.commit(ADD_CURRENT_COUNT, 7)
+        },
+        setStateArr() {
+            this.$store.commit(SET_ARR)
+        },
+        setStateObj() {
+            this.$store.commit(SET_OBJ)
+        }
+    }
+}
+&lt;/script&gt;
+
+</code></pre></div><p>Vuex为 mutations 同样提供了辅助函数 <code>mapMutations</code></p> <p>方法一: mapMutations可以接收一个字符串数组作为参数,数组中的每一项字符串都会成为当前组件的方法并且与Vuex中的同名mutation建立映射对应关系。</p> <div class="language- extra-class"><pre class="language-text"><code>import {mapMutations} from 'vuex'
+import {ADD_CURRENT_COUNT, SET_ARR} from '../store/mutation-types'
+
+export default {
+    computed: {
+        ...mapMutations([ ADD_CURRENT_COUNT, SET_ARR ]),
+    }
+}
+</code></pre></div><p>方法二:mapMutations可以接收对象作为参数,对象的每一个key都会成为当前组件的方法名,<code>value必须是mutation的同名字符串</code>与Vuex中的mutation建立映射对应关系。</p> <div class="language- extra-class"><pre class="language-text"><code> computed: {
+        ...mapMutations({ 
+         addCount: ADD_CURRENT_COUNT, 
+         setArr: SET_ARR }),
+    }
+</code></pre></div><h3 id="actions"><a href="#actions" class="header-anchor">#</a> Actions</h3> <p>Vuex给开发人员提供了一个可以执行异步操作的函数action</p> <p>Action 函数接受一个与 store 实例具有相同方法和属性的 context 对象</p> <blockquote><p>注意: action函数中接收两个参数</p> <p>参数一 context 与 store对象相似所以可以访问 context.state / context.getters / context.commit / context.dispatch</p> <p>参数二 action的载荷,action载荷与mutation一样只有一个如果需要传递多个参数请传递对象</p> <p>★★★ action是不允许直接修改state的</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>	state: {
+        result: {}
+    },
+    mutations: {
+        [types.SET_RESULT](state, result) {
+            // 修改state
+            state.result = result
+        }
+    },
+    actions: {
+        searchMusic(context, keywords) {
+            console.log(context)
+            fetch('http://musicapi.leanapp.cn/search?keywords=' + keywords)
+            .then(res =&gt; res.json())
+            // 只有mutation才能修改state,所以action异步请求数据后,只能通过提交mutation修改state
+            .then(({result}) =&gt; context.commit(types.SET_RESULT, result))
+        }
+    }
+
+</code></pre></div><h4 id="在组件中分发-action"><a href="#在组件中分发-action" class="header-anchor">#</a> 在组件中分发 Action</h4> <p>直接使用<code>this.$store.dispatch</code></p> <div class="language- extra-class"><pre class="language-text"><code>created() {
+      this.$store.dispatch('increment')
+  }
+</code></pre></div><p><code>Vuex</code>为 action 同样提供了辅助函数 <code>mapActions</code>,<code>mapActions</code>生成的方法只接受一个参数,这个参数就是当前action的载荷</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//   this.$store.dispatch('increment')</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">increment</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token literal-property property">computed</span><span class="token operator">:</span><span class="token punctuation">{</span>
+ <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+      <span class="token string">'increment'</span><span class="token punctuation">,</span> <span class="token comment">// 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`</span>
+
+      <span class="token comment">// `mapActions` 也支持载荷：</span>
+      <span class="token string">'incrementBy'</span> <span class="token comment">// 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch('incrementBy', 		amount)`</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+ <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">add</span><span class="token operator">:</span> <span class="token string">'increment'</span> <span class="token comment">// 将 `this.add()` 映射为 `this.$store.dispatch('increment')`</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Actions 支持同样的载荷方式和对象方式进行分发：</p> <div class="language- extra-class"><pre class="language-text"><code>// 以载荷形式分发
+store.dispatch('incrementAsync', {
+  amount: 10
+})
+
+// 以对象形式分发
+store.dispatch({
+  type: 'incrementAsync',
+  amount: 10
+})
+</code></pre></div><h3 id="modules"><a href="#modules" class="header-anchor">#</a> Modules</h3> <p>由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。</p> <p>为了解决以上问题，Vuex 允许我们将 store 分割成<strong>模块（module）</strong>。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割：</p> <div class="language- extra-class"><pre class="language-text"><code>state: {
+    name: 'root'
+  },
+  mutations: {
+  },
+  actions: {
+  },
+  modules: {
+    commend: {
+        state: {
+            name: '小明',
+            age: 18
+        },
+        getters: {
+            //some getters
+        },
+        mutation: {
+            // some mutations
+        },
+        actions: {
+            // some action
+        },
+        modules: {
+            // some modules
+        }
+    } 
+  }
+</code></pre></div><blockquote><p>虽然在我们在实例化vuex.Store时创建了不同的模块,但是最终生成的store对象所有数据(包含子模块的数据)依然存储在同一个state getters mutations actions中。</p></blockquote> <p>对于模块内部的 mutation 和 getter，接收的第一个参数是<strong>模块的局部状态对象</strong>。</p> <p>同样，对于模块内部的 action，局部状态通过 <code>context.state</code> 暴露出来，根节点状态则为 <code>context.rootState</code>：</p> <div class="language- extra-class"><pre class="language-text"><code>const moduleA = {
+  actions: {
+    incrementIfOddOnRootSum ({ state, commit, rootState }) {
+      if ((state.count + rootState.count) % 2 === 1) {
+        commit('increment')
+      }
+    }
+  }
+}
+</code></pre></div><p>对于模块内部的 getter，根节点状态会作为第三个参数暴露出来：</p> <div class="language- extra-class"><pre class="language-text"><code>const moduleA = {
+  // ...
+  getters: {
+    sumWithRootCount (state, getters, rootState) {
+      return state.count + rootState.count
+    }
+  }
+}
+</code></pre></div><h4 id="命名空间"><a href="#命名空间" class="header-anchor">#</a> 命名空间</h4> <p>默认情况下，模块内部的 action、mutation 和 getter 是注册在<strong>全局命名空间</strong>的——这样使得多个模块能够对同一 mutation 或 action 作出响应。</p> <p>如果希望你的模块具有更高的封装度和复用性，你可以通过添加 <code>namespaced: true</code> 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名。例如：</p> <div class="language- extra-class"><pre class="language-text"><code>const store = new Vuex.Store({
+  modules: {
+    account: {
+      namespaced: true,
+
+      // 模块内容（module assets）
+      state: () =&gt; ({ ... }), // 模块内的状态已经是嵌套的了，使用 `namespaced` 属性不会对其产生影响
+      getters: {
+        isAdmin () { ... } // -&gt; getters['account/isAdmin']
+      },
+      actions: {
+        login () { ... } // -&gt; dispatch('account/login')
+      },
+      mutations: {
+        login () { ... } // -&gt; commit('account/login')
+      },
+
+      // 嵌套模块
+      modules: {
+        // 继承父模块的命名空间
+        myPage: {
+          state: () =&gt; ({ ... }),
+          getters: {
+            profile () { ... } // -&gt; getters['account/profile']
+          }
+        },
+
+        // 进一步嵌套命名空间
+        posts: {
+          namespaced: true,
+
+          state: () =&gt; ({ ... }),
+          getters: {
+            popular () { ... } // -&gt; getters['account/posts/popular']
+          }
+        }
+      }
+    }
+  }
+})
+</code></pre></div><p>启用了命名空间的 getter 和 action 会收到局部化的 <code>getter</code>，<code>dispatch</code> 和 <code>commit</code>。</p> <p>在使用模块内容时不需要在同一模块内额外添加空间名前缀。更改 <code>namespaced</code> 属性后不需要修改模块内的代码。</p> <h4 id="module-state"><a href="#module-state" class="header-anchor">#</a> module state</h4> <p>存放在module中的state,是否开启命名空间使用方式都是一样的。都是通过<code>store.state.</code>模块名<code>.state属性名</code></p> <p>辅助函数mapState获取指定模块的属性,必须使用 <code>&quot;属性名:函数的形式&quot;</code></p> <div class="language- extra-class"><pre class="language-text"><code> ...mapState({
+      commendName: state =&gt; state.commend.name, // $store.state.commend.name  =&gt; '小王'
+      a1Name: ({a1}) =&gt; a1.name // $store.state.a1.name  =&gt; '老李头'
+    })
+</code></pre></div><p>当使用 <code>mapState</code>, <code>mapGetters</code>, <code>mapActions</code> 和 <code>mapMutations</code> 这些函数来绑定带命名空间的模块时，写起来可能比较繁琐：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token function-variable function">a</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>some<span class="token punctuation">.</span>nested<span class="token punctuation">.</span>module<span class="token punctuation">.</span>a<span class="token punctuation">,</span>
+    <span class="token function-variable function">b</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>some<span class="token punctuation">.</span>nested<span class="token punctuation">.</span>module<span class="token punctuation">.</span>b
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token string">'some/nested/module/foo'</span><span class="token punctuation">,</span> <span class="token comment">// -&gt; this['some/nested/module/foo']()</span>
+    <span class="token string">'some/nested/module/bar'</span> <span class="token comment">// -&gt; this['some/nested/module/bar']()</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>对于这种情况，你可以将模块的空间名称字符串作为第一个参数传递给上述函数，这样所有绑定都会自动将该模块作为上下文。于是上面的例子可以简化为：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token string">'some/nested/module'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token function-variable function">a</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>a<span class="token punctuation">,</span>
+    <span class="token function-variable function">b</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>b
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token string">'some/nested/module'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>
+    <span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token comment">// -&gt; this.foo()</span>
+    <span class="token string">'bar'</span> <span class="token comment">// -&gt; this.bar()</span>
+  <span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>而且，你可以通过使用 <code>createNamespacedHelpers</code> 创建基于某个命名空间辅助函数。它返回一个对象，对象里有新的绑定在给定命名空间值上的组件绑定辅助函数：</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createNamespacedHelpers <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> mapState<span class="token punctuation">,</span> mapActions <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">createNamespacedHelpers</span><span class="token punctuation">(</span><span class="token string">'some/nested/module'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">computed</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 在 `some/nested/module` 中查找</span>
+    <span class="token operator">...</span><span class="token function">mapState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token function-variable function">a</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>a<span class="token punctuation">,</span>
+      <span class="token function-variable function">b</span><span class="token operator">:</span> <span class="token parameter">state</span> <span class="token operator">=&gt;</span> state<span class="token punctuation">.</span>b
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 在 `some/nested/module` 中查找</span>
+    <span class="token operator">...</span><span class="token function">mapActions</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+      <span class="token string">'foo'</span><span class="token punctuation">,</span>
+      <span class="token string">'bar'</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="module-getters"><a href="#module-getters" class="header-anchor">#</a> module getters</h4> <p>所有module中的getter是直接存储在store.getters中的,依然通过<code>store.getters.属性名访问</code></p> <p>当开启了命名空间后module,getters 获取方式发生改变</p> <p>变为 --&gt;<code>store.getters['模块名/getter属性名']</code></p> <p>所以开启命名空间的getter可以与其他模块根store中的getter同名</p> <div class="language- extra-class"><pre class="language-text"><code>store.getters.reverseName  根store的getter
+store.getters['a1/reverseName']    a1模块的getter
+</code></pre></div><p>辅助函数mapGetter 获取module的getter方法没有变化的</p> <div class="language- extra-class"><pre class="language-text"><code>模块中getters函数包含四个参数
+参数一 state -------- 当前模块的state
+参数二 getters -------- 当前模块的getters(如果当前模块没有开启命名空间 该参数的值等于参数四)
+参数三 rootState -------- 根state store的state
+参数四 rootGetter -------- 根getters store的getters
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>computed: {
+    ...mapGetters(['reverseName']),
+    ...mapGetters({a1ReverseName: 'a1/reverseName'})
+  }
+</code></pre></div><h4 id="module-mutation-和-action"><a href="#module-mutation-和-action" class="header-anchor">#</a> module mutation 和 action</h4> <p>所有mutation和action也是直接存储在store中的,依然通过<code>store.dispatch('mutation名') store.dispatch('action名')</code>触发的</p> <blockquote><p>在开发中如果你的模块如果没有开启命名空间，mutation与action 在模块与模块之间 或模块与根store之间存在同名mutation / action 是不会造成命名冲突不会报错的，但是如果commit / dispatch 这些同名 mutation / action时他们将都会执行。</p></blockquote> <p>当开启了命名空间后module,mutation与action方法名会发生改变</p> <p>变为 --&gt; <code>'模块名/mutation名' '模块名/action名'</code></p> <div class="language- extra-class"><pre class="language-text"><code>// $store.commit('myMutation')  =&gt; '根mutation的 myMutation方法被触发了'
+// $store.commit('a1/myMutation')  =&gt; '模块 a1 mutation 的 myMutation方法被触发了'
+
+// $store.dispatch('myAction') =&gt; '根action的 myAction方法被触发了'
+// $store.dispatch('a1/myAction') =&gt; '模块 a1 action的 myAction方法被触发了'
+
+</code></pre></div><blockquote><p>模块中mutation\action函数无论是否开启具名空间依然只包含两个参数</p> <p>参数一: 当前模块的局部state</p> <p>参数二: 载荷</p></blockquote> <p><code>命名空间开启的模块</code>action内部 <code>context</code>.commit 提交mutation时dispatch分发action时<code>会自动添加命名空间前缀</code>,从而实现<code>只提交当前模块mutation/action</code>的效果</p> <div class="language- extra-class"><pre class="language-text"><code>如果你想要在开启命名空间模块的`action`中使用`context提交/分发全局mutation/action`请在`commit dispatch`方法传入`第三个参数{root:true}`代表调用全局
+dispatch('someOtherAction', null, { root: true }) 
+
+commit('someMutation', null, { root: true }
+</code></pre></div><h3 id="store-commit和store-dispatch的区别及用法"><a href="#store-commit和store-dispatch的区别及用法" class="header-anchor">#</a> store.commit和store.dispatch的区别及用法</h3> <p>mutations 和 actions 都要在组件的methods中使用 ，而state和getters都是在组件中的computed中使用</p> <p>dispatch是在actions中使用的，action是不允许直接修改state的，所以我们要在actions中定义提交mutations的方法</p> <blockquote><p>1、commit: 用来提交当前模块的mutations</p> <p>​	dispatch: 用来提交当前模块的actions(actions可以提交mutations,可以进行异步操作)</p> <p>​	commit 有些做不到的可以用 dispatch 进行提交</p> <p>2、mutations修改state, action提交mutations。但是如果修改完还想做其他事情就用actions比较方便(then后执行想要做的事情) ==&gt; this.$store.dispatch().then()</p> <p>3、commit: 同步操作 存储 this.$store.commit('changeValue',name)</p> <p>​	dispatch: 异步操作 存储 this.$store.dispatch('getlists',name)</p></blockquote></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vuepress-blog/vue3笔记.html" class="prev">
+        vue3笔记
+      </a></span> <span class="next"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html">
+        Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><section class="side-anchor"><ul style="display:none;"></ul></section></div></div>
+    <script src="/vuepress-blog/assets/js/app.0947dbc9.js" defer></script><script src="/vuepress-blog/assets/js/2.9d54d2e6.js" defer></script><script src="/vuepress-blog/assets/js/27.c50ef18f.js" defer></script>
+  </body>
+</html>

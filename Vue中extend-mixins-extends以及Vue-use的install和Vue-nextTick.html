@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick | 前端笔记</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="前端笔记">
+    
+    <link rel="preload" href="/vuepress-blog/assets/css/0.styles.e0cecbec.css" as="style"><link rel="preload" href="/vuepress-blog/assets/js/app.0947dbc9.js" as="script"><link rel="preload" href="/vuepress-blog/assets/js/2.9d54d2e6.js" as="script"><link rel="preload" href="/vuepress-blog/assets/js/11.3d077320.js" as="script"><link rel="prefetch" href="/vuepress-blog/assets/js/10.9cfc9567.js"><link rel="prefetch" href="/vuepress-blog/assets/js/12.39f7ba05.js"><link rel="prefetch" href="/vuepress-blog/assets/js/13.bd5ca7c4.js"><link rel="prefetch" href="/vuepress-blog/assets/js/14.069d974e.js"><link rel="prefetch" href="/vuepress-blog/assets/js/15.d6d34b6f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/16.661f4a7c.js"><link rel="prefetch" href="/vuepress-blog/assets/js/17.0096b720.js"><link rel="prefetch" href="/vuepress-blog/assets/js/18.ea7d075a.js"><link rel="prefetch" href="/vuepress-blog/assets/js/19.dda8cf70.js"><link rel="prefetch" href="/vuepress-blog/assets/js/20.bbb6e4a0.js"><link rel="prefetch" href="/vuepress-blog/assets/js/21.5c7b6bab.js"><link rel="prefetch" href="/vuepress-blog/assets/js/22.a58ff1d8.js"><link rel="prefetch" href="/vuepress-blog/assets/js/23.92f18123.js"><link rel="prefetch" href="/vuepress-blog/assets/js/24.98a50d67.js"><link rel="prefetch" href="/vuepress-blog/assets/js/25.91a3e6c3.js"><link rel="prefetch" href="/vuepress-blog/assets/js/26.b9d79099.js"><link rel="prefetch" href="/vuepress-blog/assets/js/27.c50ef18f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/28.ecd67280.js"><link rel="prefetch" href="/vuepress-blog/assets/js/29.44f0800f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/3.5393f454.js"><link rel="prefetch" href="/vuepress-blog/assets/js/30.c1d65828.js"><link rel="prefetch" href="/vuepress-blog/assets/js/31.d1281d8d.js"><link rel="prefetch" href="/vuepress-blog/assets/js/32.8a00952e.js"><link rel="prefetch" href="/vuepress-blog/assets/js/33.e5857412.js"><link rel="prefetch" href="/vuepress-blog/assets/js/34.cc2a8fd0.js"><link rel="prefetch" href="/vuepress-blog/assets/js/35.0c7488f5.js"><link rel="prefetch" href="/vuepress-blog/assets/js/36.5b7ee302.js"><link rel="prefetch" href="/vuepress-blog/assets/js/37.4df98777.js"><link rel="prefetch" href="/vuepress-blog/assets/js/38.9072547a.js"><link rel="prefetch" href="/vuepress-blog/assets/js/39.27723f7b.js"><link rel="prefetch" href="/vuepress-blog/assets/js/4.c72729ae.js"><link rel="prefetch" href="/vuepress-blog/assets/js/40.05568b60.js"><link rel="prefetch" href="/vuepress-blog/assets/js/41.22bef9bc.js"><link rel="prefetch" href="/vuepress-blog/assets/js/42.78ead8bc.js"><link rel="prefetch" href="/vuepress-blog/assets/js/43.d6a8f93b.js"><link rel="prefetch" href="/vuepress-blog/assets/js/44.b463d848.js"><link rel="prefetch" href="/vuepress-blog/assets/js/45.507f6c29.js"><link rel="prefetch" href="/vuepress-blog/assets/js/46.05a73236.js"><link rel="prefetch" href="/vuepress-blog/assets/js/47.b423c42f.js"><link rel="prefetch" href="/vuepress-blog/assets/js/48.3dd4dd00.js"><link rel="prefetch" href="/vuepress-blog/assets/js/5.44547aad.js"><link rel="prefetch" href="/vuepress-blog/assets/js/6.18c29f84.js"><link rel="prefetch" href="/vuepress-blog/assets/js/7.1f43074c.js"><link rel="prefetch" href="/vuepress-blog/assets/js/8.a3e3bbda.js"><link rel="prefetch" href="/vuepress-blog/assets/js/9.7fbdd959.js">
+    <link rel="stylesheet" href="/vuepress-blog/assets/css/0.styles.e0cecbec.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vuepress-blog/" class="home-link router-link-active"><!----> <span class="site-name">前端笔记</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>列表</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vuepress-blog/commonJS与es6模块化.html" class="sidebar-link">exports、module.exports和export、export default</a></li><li><a href="/vuepress-blog/eslint使用、报错部分快速修复.html" class="sidebar-link">vue-cli中eslint检验指定文件/夹、报错部分快速修复</a></li><li><a href="/vuepress-blog/git-HEAD-与HEAD-的区别.html" class="sidebar-link">git HEAD~与HEAD^的区别</a></li><li><a href="/vuepress-blog/git-merge-no-ff-与-ff-和-squash的区别.html" class="sidebar-link">git merge --no-ff 与--ff 和--squash的区别</a></li><li><a href="/vuepress-blog/Git凭据管理的三种方式-https.html" class="sidebar-link">Git凭据管理的三种方式(https)</a></li><li><a href="/vuepress-blog/git操作指令.html" class="sidebar-link">git命令总结</a></li><li><a href="/vuepress-blog/JS工具函数.html" class="sidebar-link">JS工具函数</a></li><li><a href="/vuepress-blog/js执行机制.html" class="sidebar-link">js执行机制</a></li><li><a href="/vuepress-blog/nodejs-websocket.html" class="sidebar-link">nodejs-websocket</a></li><li><a href="/vuepress-blog/pinia.html" class="sidebar-link">pinia</a></li><li><a href="/vuepress-blog/Proxy和Object-defineProperty.html" class="sidebar-link">Proxy和Object.defineProperty</a></li><li><a href="/vuepress-blog/react笔记.html" class="sidebar-link">react笔记</a></li><li><a href="/vuepress-blog/router4笔记.html" class="sidebar-link">router4笔记</a></li><li><a href="/vuepress-blog/uniapp笔记.html" class="sidebar-link">uniapp笔记</a></li><li><a href="/vuepress-blog/vite与webpack.html" class="sidebar-link">vite与webpack</a></li><li><a href="/vuepress-blog/vue-elementui-表单检验中发送接口进行校验.html" class="sidebar-link">vue+elementui 表单检验中发送接口进行校验</a></li><li><a href="/vuepress-blog/vue3+elementplus+ts+pinia踩坑记录.html" class="sidebar-link">vue3+elementplus+ts+pinia踩坑记录</a></li><li><a href="/vuepress-blog/vue3笔记.html" class="sidebar-link">vue3笔记</a></li><li><a href="/vuepress-blog/vuex.html" class="sidebar-link">vuex</a></li><li><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html" class="active sidebar-link">Vue中extend,mixins,extends以及Vue.use的install和Vue.nextTick</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html#_1-vue-extend" class="sidebar-link">1.Vue.extend</a></li><li class="sidebar-sub-header"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html#_2-vue-component" class="sidebar-link">2.Vue.component</a></li><li class="sidebar-sub-header"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html#_3-mixins" class="sidebar-link">3.mixins</a></li><li class="sidebar-sub-header"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html#_4-vue-use" class="sidebar-link">4.Vue.use()</a></li><li class="sidebar-sub-header"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html#_5-install" class="sidebar-link">5.install</a></li><li class="sidebar-sub-header"><a href="/vuepress-blog/Vue中extend-mixins-extends以及Vue-use的install和Vue-nextTick.html#_4-extends" class="sidebar-link">4.extends</a></li></ul></li><li><a href="/vuepress-blog/vue响应式原理及收集依赖.html" class="sidebar-link">vue响应式原理、依赖收集</a></li><li><a href="/vuepress-blog/vue对数组的处理.html" class="sidebar-link">vue对数组的处理</a></li><li><a href="/vuepress-blog/vue知识点记录.html" class="sidebar-link">vue知识点记录</a></li><li><a href="/vuepress-blog/vue第三方组件css修改.html" class="sidebar-link">vue第三方组件css修改</a></li><li><a href="/vuepress-blog/vue组件通信.html" class="sidebar-link">vue组件通信</a></li><li><a href="/vuepress-blog/webpack笔记.html" class="sidebar-link">webpack笔记</a></li><li><a href="/vuepress-blog/前端学习资料.html" class="sidebar-link">前端学习资料</a></li><li><a href="/vuepress-blog/前端性能优化面试题.html" class="sidebar-link">前端性能优化面试题总结</a></li><li><a href="/vuepress-blog/前端鉴权cookie、session、token、jwt、单点登录.html" class="sidebar-link">前端鉴权cookie、session、token、jwt、单点登录</a></li><li><a href="/vuepress-blog/单点登录SSO.html" class="sidebar-link">单点登录SSO</a></li><li><a href="/vuepress-blog/原型链.html" class="sidebar-link">原型链</a></li><li><a href="/vuepress-blog/常用的正则表达式大全.html" class="sidebar-link">常用的正则表达式大全</a></li><li><a href="/vuepress-blog/开发中容易遇到的问题.html" class="sidebar-link">开发中容易遇到的问题</a></li><li><a href="/vuepress-blog/数据类型判断.html" class="sidebar-link">数据类型判断</a></li><li><a href="/vuepress-blog/样式清单整理.html" class="sidebar-link">样式清单整理</a></li><li><a href="/vuepress-blog/组件库开发.html" class="sidebar-link">组件库开发</a></li><li><a href="/vuepress-blog/网站、论坛合集.html" class="sidebar-link">网站、论坛合集</a></li><li><a href="/vuepress-blog/虚拟DOM与DIFF算法.html" class="sidebar-link">虚拟DOM与DIFF算法</a></li><li><a href="/vuepress-blog/详解mixins混入使用.html" class="sidebar-link">详解mixins混入使用</a></li><li><a href="/vuepress-blog/金额输入框封装（千分位，禁止中文输入）.html" class="sidebar-link">金额输入框封装（千分位，禁止中文输入）</a></li><li><a href="/vuepress-blog/键盘事件keydown，keypress，keyup.html" class="sidebar-link">键盘事件keydown，keypress，keyup</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="_1-vue-extend"><a href="#_1-vue-extend" class="header-anchor">#</a> 1.Vue.extend</h2> <div class="language- extra-class"><pre class="language-text"><code>使用基础 Vue 构造器，创建一个“子类”
+场景:vue 组件中有些需要将一些元素挂载到元素上,这个时候 extend 就起到作用了
+Vue.extend实际是创建一个构造器,对应的初始化构造器,并将其挂载到标签上   是构造一个组件的语法器 
+像是我们在JS中使用的构造函数，先定义好，然后在需要使用的地方new一下
+
+为什么使用 extend
+在 vue 项目中，我们有了初始化的根实例后，所有页面基本上都是通过 router 来管理，组件也是通过 import 来进行局部注册，所以组件的创建我们不需要去关注，相比 extend 要更省心一点点。但是这样做会有几个缺点：
+
+组件模板都是事先定义好的，如果我要从接口动态渲染组件怎么办？
+所有内容都是在 #app 下渲染，注册组件都是在当前位置渲染。如果我要实现一个类似于 window.alert() 提示组件要求像调用 JS 函数一样调用它，该怎么办？
+这时候，Vue.extend + vm.$mount 组合就派上用场了。
+
+写法:
+// 创建构造器
+var Profile = Vue.extend({
+  template: '&lt;p&gt;{{extendData}}&lt;/br&gt;实例传入的数据为:{{propsExtend}}&lt;/p&gt;',//template对应的标签最外层必须只有一个标签
+  data: function () {
+    return {
+      extendData: '这是extend扩展的数据',
+    }
+  },
+  mounted() {
+		setTimeout(() =&gt; {
+			// 3s 后通过父级移除子元素的方式移除该组件实例和DOM节点
+			this.$destroy();
+			this.$el.parentNode.removeChild(this.$el);
+		}, 3000);
+	}
+  props:['propsExtend']
+})
+
+// 创建的构造器可以挂载到元素上,也可以通过 components 或 Vue.component()注册使用
+// 挂载到一个元素上。通过propsData传参.
+new Profile({propsData:{propsExtend:'我是实例传入的数据'}}).$mount('#app-extend')
+$mount('要添加到的容器') 如果不传入选择器，将渲染为文档之外的的元素，不可为html或body标签
+但是可以
+instance = new Profile({propsData:{propsExtend:'我是实例传入的数据'}});     document.body.appendChild(instance.$mount().$el);
+示例：
+	//message.js
+	import Vue from &quot;vue&quot;
+    import message from './message.vue'
+    let MessageContructor  = Vue.extend(message)
+    let instance
+    let Message = function(options = {}){
+        instance = new MessageContructor({propsData:{propsExtend:'我是实例传入的数据'}});
+        document.body.appendChild(instance.$mount().$el);
+    }
+
+    export default Message;
+    //main.js
+    import Message from '@/components/message'
+	Vue.prototype.$message = Message
+
+或者
+// 通过 components(局部组件注册) 或 Vue.component()注册
+Vue.component('Profile',Profile)
+
+</code></pre></div><h2 id="_2-vue-component"><a href="#_2-vue-component" class="header-anchor">#</a> 2.Vue.component</h2> <div class="language- extra-class"><pre class="language-text"><code>1.将通过 Vue.extend 生成的扩展实例构造器注册（命名）为一个全局组件,参数可以是Vue.extend()扩展的实例,也可以是一个对象(会自动调用extend方法) 2.两个参数,一个组件名,一个extend构造器或者对象
+//1.创建组件构造器
+  var obj = {
+    props: [],
+    template: '&lt;div&gt;&lt;p&gt;{{extendData}}&lt;/p&gt;&lt;/div&gt;',//最外层只能有一个大盒子,这个和&lt;tempalte&gt;对应规则一致
+    data: function () {
+      return {
+        extendData: '这是Vue.component传入Vue.extend注册的组件',
+      }
+    },
+  };
+ 
+  var Profile = Vue.extend(obj);
+ 
+  //2.注册组件方法一:传入Vue.extend扩展过得构造器
+  Vue.component('component-one', Profile)
+ 
+  //2.注册组件方法二:直接传入
+  Vue.component('component-two', obj)
+ 
+  //3.挂载
+  new Vue({
+    el: '#app',
+    components:{
+    	
+    }
+  });
+ //脚手架中
+方法1
+    // 引入
+    import 组件名 from '@/components/xxx'
+    // 注册为全局组件
+    Vue.component('组件名',组件名)
+方法2
+	在src/components文件夹下新建index.js文件
+ 	// 引入写好的全局组件
+    import 组件名1 from './xxx'
+    import 组件名2 from './yyy'
+    // 默认导出插件
+    export default {
+        install: function(Vue) {
+            console.log('自定义的插件~')
+            // 在自定义的插件中注册为全局组件
+            Vue.component('组件名1',xxx)
+            Vue.component('组件名2',yyy)
+            // 也可以往Vue的原型对象上添加属性或者方法，名字可以自定义
+            // 在其他.vue结尾的文件中，可以通过this，访问自己添加的属性和方法
+            Vue.prototype.num = 10
+            Vue.prototype.$sayHi = () =&gt; {
+                alert('Hi~')
+            }
+        }
+    }
+    在main.js文件下，使用该插件。
+    // 导入写好的自定义插件
+    import myCom from '@/components'
+    Vue.use(myCom)
+
+  //获取注册的组件 (始终返回构造器)
+  var oneComponent=Vue.component('component-one');
+  console.log(oneComponent===Profile)//true,返回的Profile构造器
+
+</code></pre></div><h2 id="_3-mixins"><a href="#_3-mixins" class="header-anchor">#</a> 3.mixins</h2> <div class="language- extra-class"><pre class="language-text"><code>场景:有些组件有些重复的 js 逻辑,如校验手机验证码,解析时间等,mixins 就可以实现这种混入
+详见另外一篇文档--详解mixins混入使用
+
+</code></pre></div><h2 id="_4-vue-use"><a href="#_4-vue-use" class="header-anchor">#</a> 4.Vue.use()</h2> <div class="language- extra-class"><pre class="language-text"><code>
+场景:我们使用 element时会先 import,再 Vue.use()一下,实际上就是注册组件,触发 install 方法;
+这个在组件调用会经常使用到;
+会自动组织多次注册相同的插件.
+Vue.use()多次调用需写多次
+    Vue.use(myPlugin)
+    Vue.use(Vant)
+    Vue.use(Lazyload)
+</code></pre></div><h2 id="_5-install"><a href="#_5-install" class="header-anchor">#</a> 5.install</h2> <div class="language- extra-class"><pre class="language-text"><code>场景:在 Vue.use()说到,执行该方法会触发 install
+
+vue提供install可供我们开发新的插件及全局注册组件等
+install方法第一个参数是vue的构造器，第二个参数是可选的选项对象
+export default {
+	install(Vue,option){
+		组件
+		指令
+		混入
+		挂载vue原型
+	}
+}
+全局注册组件
+import PageTools from '@/components/PageTools/pageTools.vue'
+export default {
+  install(Vue) {
+    // 注册组件  挂载函数  注册过滤器  注册自定义指令
+    Vue.component('PageTools', PageTools)
+   
+    Vue.prototype.$sleep = sleep
+    // 过滤器
+    Vue.filter('relTime', relTime)
+  }
+}
+在main.js中直接用引用并Vue.use进行注册
+import Component from '@/components'
+Vue.use(Component)
+全局自定义指令
+export default{
+	install(Vue){
+		Vue.directive('pre',{
+			inserted(button,bind){
+				button.addEventListener('click',()=&gt;{
+					if(!button.disabled){
+						button.disabled = true;
+						setTimeout(()=&gt;{
+							button.disabled = false
+						},1000)
+					}
+				})
+			}
+		})
+	}
+}
+在main.js跟注册组件一样
+import pre from '@/aiqi'
+Vue.use(pre)
+
+var MyPlugin = {};
+  MyPlugin.install = function (Vue, options) {
+    // 2. 添加全局资源,第二个参数传一个值默认是update对应的值
+    Vue.directive('click', {
+      bind(el, binding, vnode, oldVnode) {
+        //做绑定的准备工作,添加时间监听
+        console.log('指令my-directive的bind执行啦');
+      },
+      inserted: function(el){
+      //获取绑定的元素
+      console.log('指令my-directive的inserted执行啦');
+      },
+      update: function(){
+      //根据获得的新值执行对应的更新
+      //对于初始值也会调用一次
+      console.log('指令my-directive的update执行啦');
+      },
+      componentUpdated: function(){
+      console.log('指令my-directive的componentUpdated执行啦');
+      },
+      unbind: function(){
+      //做清理操作
+      //比如移除bind时绑定的事件监听器
+      console.log('指令my-directive的unbind执行啦');
+      }
+    })
+
+    // 3. 注入组件
+    Vue.mixin({
+      created: function () {
+        console.log('注入组件的created被调用啦');
+        console.log('options的值为',options)
+      }
+    })
+
+    // 4. 添加实例方法
+    Vue.prototype.$myMethod = function (methodOptions) {
+      console.log('实例方法myMethod被调用啦');
+    }
+  }
+
+  //调用MyPlugin
+  Vue.use(MyPlugin,{someOption: true })
+
+  //3.挂载
+  new Vue({
+    el: '#app'
+  });
+
+
+</code></pre></div><h2 id="_4-extends"><a href="#_4-extends" class="header-anchor">#</a> 4.extends</h2> <div class="language- extra-class"><pre class="language-text"><code>extends用法和mixins很相似,通过暴露一个extends对象到组件中使用。只不过接收的参数是简单的选项对象或构造函数,所以extends只能单次扩展一个组件
+
+定义的属性覆盖规则和mixins一致
+</code></pre></div><p>Vue.extend和Vue.component是为了创建构造器和组件; mixins和extends是为了拓展组件; install是开发插件; 总的顺序关系: Vue.extend&gt;Vue.component&gt;extends&gt;mixins&gt; 组件</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vuepress-blog/vuex.html" class="prev">
+        vuex
+      </a></span> <span class="next"><a href="/vuepress-blog/vue响应式原理及收集依赖.html">
+        vue响应式原理、依赖收集
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><section class="side-anchor"><ul style="display:none;"></ul></section></div></div>
+    <script src="/vuepress-blog/assets/js/app.0947dbc9.js" defer></script><script src="/vuepress-blog/assets/js/2.9d54d2e6.js" defer></script><script src="/vuepress-blog/assets/js/11.3d077320.js" defer></script>
+  </body>
+</html>
